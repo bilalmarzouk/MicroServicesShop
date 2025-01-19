@@ -6,7 +6,7 @@ using Shop.Services.CouponAPI.Models.Dto;
 
 namespace Shop.Services.CouponAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/CouponApi")]
     [ApiController]
     public class CouponAPIController : ControllerBase
     {
@@ -28,7 +28,7 @@ namespace Shop.Services.CouponAPI.Controllers
             try
             {
                 IEnumerable<Coupon> result = _db.Coupons.ToList();
-                _response.Result = _mapper.Map<IEnumerable<Coupon>>(result);
+                _response.Result = _mapper.Map<IEnumerable<CouponDto>>(result);
                 return _response;
             }
             catch (Exception ex)
@@ -114,6 +114,7 @@ namespace Shop.Services.CouponAPI.Controllers
             return _response;
         }
         [HttpDelete]
+        [Route("{id:int}")]
         public ResponseDto Delete(int id)
         {
             try

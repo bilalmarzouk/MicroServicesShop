@@ -15,9 +15,9 @@ namespace Shop.Web.Service
         {
             return await _baseService.SendAsync(new RequestDto()
             {
-                ApiType = Utility.Details.ApiType.GET,
+                ApiType = Utility.Details.ApiType.POST,
                 Data = coupondto,
-                Url = Details.CouponAPIBase + $"/api/coupon/"
+                Url = Details.CouponAPIBase + $"/api/CouponApi/"
 
             });
         }
@@ -27,7 +27,7 @@ namespace Shop.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Details.ApiType.DELETE,
-                Url = Details.CouponAPIBase + $"/api/coupon/{id}"
+                Url = Details.CouponAPIBase + $"/api/CouponApi/{id}"
 
             });
         }
@@ -37,7 +37,7 @@ namespace Shop.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Details.ApiType.GET,
-                Url = Details.CouponAPIBase + "/api/coupon"
+                Url = Details.CouponAPIBase + "/api/CouponApi"
 
             });
         }
@@ -47,7 +47,7 @@ namespace Shop.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Details.ApiType.GET,
-                Url = Details.CouponAPIBase + $"/api/coupon/GetByCode/{code}"
+                Url = Details.CouponAPIBase + $"/api/CouponApi/GetByCode/{code}"
 
             });
         }
@@ -57,7 +57,7 @@ namespace Shop.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Details.ApiType.GET,
-                Url = Details.CouponAPIBase + $"/api/coupon/{id}"
+                Url = Details.CouponAPIBase + $"/api/CouponApi/{id}"
 
             });
         }
@@ -68,7 +68,7 @@ namespace Shop.Web.Service
             {
                 ApiType = Utility.Details.ApiType.PUT,
                 Data = coupon,
-                Url = Details.CouponAPIBase + $"/api/coupon/"
+                Url = Details.CouponAPIBase + $"/api/CouponApi/"
 
             });
         }

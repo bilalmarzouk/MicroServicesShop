@@ -12,7 +12,7 @@ namespace Shop.Web.Controllers
         {
             _couponService = couponService;
         }
-        public async Task<IActionResult> CouponAction()
+        public async Task<IActionResult> CouponIndex()
         {
             List<CouponDto>? couponList = new();
             ResponseDto? response = await _couponService.GetAllCouponAsync();
@@ -21,7 +21,54 @@ namespace Shop.Web.Controllers
             {
                 couponList = JsonConvert.DeserializeObject<List<CouponDto>>(Convert.ToString(response.Result));
             }
+            return View(couponList);
+        }
+        public async Task<IActionResult> CouponCreate()
+        {
+
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CouponCreate(CouponDto coupon)
+        {
+            if (ModelState.IsValid)
+            {
+                ResponseDto? response = await _couponService.CreateCouponAsync(coupon);
+                if (response != null && response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(CouponIndex));
+                }
+            }
+            return View(coupon);
+        }
+
+        public async Task<IActionResult> CouponDelete(int couponId)
+        {
+            if (ModelState.IsValid)
+            {
+                ResponseDto? response = await _couponService.GetCouponByIdAsync(couponId);
+                if (response != null && response.IsSuccess)
+                {
+                    CouponDto? coupon = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(response.Result));
+                    return View(coupon);
+                }
+            }
+            return NotFound();
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CouponDelete(CouponDto coupon)
+        {
+                ResponseDto? response = await _couponService.DeleteCouponByIdAsync(coupon.CouponId);
+                if (response != null && response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(CouponIndex));
+                }
+            
+            return View(coupon);
+
         }
     }
 }
