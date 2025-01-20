@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Services.CouponAPI", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Web", "Shop.Web\Shop.Web.csproj", "{A808780D-7CDE-4501-90A1-2A5FD3BE46B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Services.AuthApi", "Shop.Services.AuthApi\Shop.Services.AuthApi.csproj", "{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{A808780D-7CDE-4501-90A1-2A5FD3BE46B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A808780D-7CDE-4501-90A1-2A5FD3BE46B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A808780D-7CDE-4501-90A1-2A5FD3BE46B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,5 +42,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F26529FD-71A1-4399-B0B6-2DC84B4B714B} = {66D22BFE-4636-4B31-A609-E0A8952D8F6B}
 		{A808780D-7CDE-4501-90A1-2A5FD3BE46B2} = {41F0181F-FD37-44FB-B3FB-AC85D2FD4949}
+		{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4} = {66D22BFE-4636-4B31-A609-E0A8952D8F6B}
 	EndGlobalSection
 EndGlobal

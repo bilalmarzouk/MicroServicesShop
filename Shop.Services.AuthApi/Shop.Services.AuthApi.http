@@ -1,0 +1,6 @@
+@Shop.Services.AuthApi_HostAddress = http://localhost:5080
+
+GET {{Shop.Services.AuthApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
