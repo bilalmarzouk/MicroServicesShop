@@ -3,12 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Services.AuthApi.Data;
 using Shop.Services.AuthApi.Model;
 using Shop.Services.AuthApi.Model.Dto;
+using Shop.Services.AuthApi.Service;
+using Shop.Services.AuthApi.Service.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IAuthService, AuthService>();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddSwaggerGen();
 
@@ -17,6 +20,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 );
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
 builder.Services.AddIdentity<ApplicationUsers, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+builder.Services.AddScoped<IJWTTokenGenrator, JWTTokenGenrator>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
