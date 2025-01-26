@@ -4,6 +4,6 @@ namespace Shop.Web.Service.Interfaces
 {
     public interface IBaseService
     {
-        Task<ResponseDto> SendAsync(RequestDto requestdto);
+        Task<ResponseDto> SendAsync(RequestDto requestdto,bool withBearer = true);
     }
 }

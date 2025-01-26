@@ -18,7 +18,7 @@ namespace Shop.Services.AuthApi.Controllers
             _response = new();
         }
 
-        [HttpPost("regiser")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDTO model)
         {
             var responseMassage = await _authService.Register(model);

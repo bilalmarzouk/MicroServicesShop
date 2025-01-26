@@ -17,7 +17,7 @@ namespace Shop.Services.AuthApi.Service
         {
             _jwtOptions = jwtOptions.Value;
         }
-        public string GenrateToken(ApplicationUsers applicationuser)
+        public string GenrateToken(ApplicationUsers applicationuser,IEnumerable<string> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -29,6 +29,7 @@ namespace Shop.Services.AuthApi.Service
                 new Claim(JwtRegisteredClaimNames.Sub,applicationuser.Id),
                 new Claim(JwtRegisteredClaimNames.Name,applicationuser.UserName),
             };
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role,role)));
             var tokendescripter = new SecurityTokenDescriptor
             {
                 Audience = _jwtOptions.Audience,

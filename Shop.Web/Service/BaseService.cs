@@ -11,17 +11,24 @@ namespace Shop.Web.Service
     {
 
         private readonly IHttpClientFactory _httpClientFactory;
-        public BaseService(IHttpClientFactory httpClientFactory)
+        private readonly ITokenProvider _tokenProvider;
+        public BaseService(IHttpClientFactory httpClientFactory,ITokenProvider tokenPRovider)
         {
             _httpClientFactory = httpClientFactory;
+            _tokenProvider = tokenPRovider;
         }
 
-        public async Task<ResponseDto?> SendAsync(RequestDto requestdto)
+        public async Task<ResponseDto?> SendAsync(RequestDto requestdto, bool withBearer = true)
         {
             HttpClient client = _httpClientFactory.CreateClient("ShopApi");
             HttpRequestMessage message = new();
             message.Headers.Add("Accept", "application/json");
             //token
+            if(withBearer)
+            {
+                var token = _tokenProvider.GetToken();
+                message.Headers.Add("Authorization",$"Bearer {token}");
+            }
 
             message.RequestUri = new Uri(requestdto.Url);
 

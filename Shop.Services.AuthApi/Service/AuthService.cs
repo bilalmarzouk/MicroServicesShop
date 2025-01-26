@@ -47,7 +47,8 @@ namespace Shop.Services.AuthApi.Service
                     Token = ""
                 };
             }
-            var token =_jwtTokenGenrator.GenrateToken(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var token =_jwtTokenGenrator.GenrateToken(user,roles);
 
             UserDTO userDto = new UserDTO()
             {

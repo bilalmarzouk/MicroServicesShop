@@ -30,7 +30,7 @@ namespace Shop.Web.Service
                 Data = loginRequestDto,
                 Url = Details.AuthAPIBase + $"/api/auth/login"
 
-            });
+            }, withBearer: false);
         }
 
         public async Task<ResponseDto?> RegisterAsync(RegistrationRequestDTO registerationRequestDto)
@@ -41,7 +41,7 @@ namespace Shop.Web.Service
                 Data = registerationRequestDto,
                 Url = Details.AuthAPIBase + $"/api/auth/register"
 
-            });
+            }, withBearer: false);
         }
     }
 }
