@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Web", "Shop.Web\Shop.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Services.AuthApi", "Shop.Services.AuthApi\Shop.Services.AuthApi.csproj", "{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Services.ProductAPI", "Shop.Services.ProductAPI\Shop.Services.ProductAPI.csproj", "{6FB7E564-E7F0-4CB3-B3E5-1D9B170C89F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Services.ShoppingCart", "Shop.Services.ShoppingCart\Shop.Services.ShoppingCart.csproj", "{17ABCC87-AFAE-4FF8-80E2-C94C1922E3B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,14 @@ Global
 		{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FB7E564-E7F0-4CB3-B3E5-1D9B170C89F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FB7E564-E7F0-4CB3-B3E5-1D9B170C89F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FB7E564-E7F0-4CB3-B3E5-1D9B170C89F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FB7E564-E7F0-4CB3-B3E5-1D9B170C89F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17ABCC87-AFAE-4FF8-80E2-C94C1922E3B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17ABCC87-AFAE-4FF8-80E2-C94C1922E3B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17ABCC87-AFAE-4FF8-80E2-C94C1922E3B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17ABCC87-AFAE-4FF8-80E2-C94C1922E3B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,5 +55,7 @@ Global
 		{F26529FD-71A1-4399-B0B6-2DC84B4B714B} = {66D22BFE-4636-4B31-A609-E0A8952D8F6B}
 		{A808780D-7CDE-4501-90A1-2A5FD3BE46B2} = {41F0181F-FD37-44FB-B3FB-AC85D2FD4949}
 		{0E84A426-A6E2-4B7F-ADC4-A031F4815AD4} = {66D22BFE-4636-4B31-A609-E0A8952D8F6B}
+		{6FB7E564-E7F0-4CB3-B3E5-1D9B170C89F5} = {66D22BFE-4636-4B31-A609-E0A8952D8F6B}
+		{17ABCC87-AFAE-4FF8-80E2-C94C1922E3B2} = {66D22BFE-4636-4B31-A609-E0A8952D8F6B}
 	EndGlobalSection
 EndGlobal
