@@ -9,7 +9,7 @@ using Shop.Services.ShoppingCart.Service.IService;
 
 namespace Shop.Services.ShoppingCart.Controllers
 {
-    [Route("api/cart")]
+    [Route("api/CartApi")]
     [ApiController]
     public class CartAPIController : ControllerBase
     {
@@ -79,7 +79,7 @@ namespace Shop.Services.ShoppingCart.Controllers
             {
                 CartDto cart = new()
                 {
-                    CartHeader = _mapper.Map<CartHeaderDto>(_db.CartHeaders.First(u => userId == userId))
+                    CartHeader = _mapper.Map<CartHeaderDto>(_db.CartHeaders.First(u => u.UserId == userId))
                 };
                 cart.CartDetails = _mapper.Map<IEnumerable<CartDetailDto>>(
                     _db.CartDetails.Where(u => u.CartHeaderId == cart.CartHeader.CartHeaderId));
@@ -88,6 +88,7 @@ namespace Shop.Services.ShoppingCart.Controllers
                 foreach (var item in cart.CartDetails)
                 {
                     item.Product = productDtos.FirstOrDefault(u => u.ProductId == item.ProductId);
+                    item.Product.Count = item.Count;
                     cart.CartHeader.CartTotal += (item.Count * item.Product.Price);
                 }
 

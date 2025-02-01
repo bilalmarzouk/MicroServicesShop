@@ -9,11 +9,11 @@ namespace Shop.Services.CouponAPI.Controllers
 {
     [Route("api/CouponApi")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CouponAPIController : ControllerBase
     {
 
-        private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db; 
         private ResponseDto _response;
         private IMapper _mapper;
         public CouponAPIController(ApplicationDbContext db,IMapper mapper)

@@ -13,5 +13,6 @@ namespace Shop.Services.ShoppingCart.Model.Dto
         public string Description { get; set; }
         public string CategoryName { get; set; }
         public string ImageUrl { get; set; }
+        public int Count { get; set; }
     }
 }

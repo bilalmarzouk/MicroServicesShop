@@ -6,6 +6,7 @@ using Shop.Services.ShoppingCart.Data;
 using Shop.Services.ShoppingCart.Extentions;
 using Shop.Services.ShoppingCart.Service;
 using Shop.Services.ShoppingCart.Service.IService;
+using Shop.Services.ShoppingCart.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,11 +21,14 @@ builder.Services.AddOpenApi();
 var mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<APiAuthenticationHttpClientHandler>();
 builder.Services.AddScoped<IProductService, ProductService>();
+
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.AddAppAuthentication();
-builder.Services.AddHttpClient("Product", u => u.BaseAddress = new Uri(builder.Configuration["ApiSettings:ServiceUrls:ProductAPI"]));
-builder.Services.AddHttpClient("Coupon", u => u.BaseAddress = new Uri(builder.Configuration["ApiSettings:ServiceUrls:CouponAPI"]));
+builder.Services.AddHttpClient("Product", u => u.BaseAddress = new Uri(builder.Configuration["ApiSettings:ServiceUrls:ProductAPI"])).AddHttpMessageHandler<APiAuthenticationHttpClientHandler>();
+builder.Services.AddHttpClient("Coupon", u => u.BaseAddress = new Uri(builder.Configuration["ApiSettings:ServiceUrls:CouponAPI"])).AddHttpMessageHandler<APiAuthenticationHttpClientHandler>(); 
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition(name: "Bearer", securityScheme: new Microsoft.OpenApi.Models.OpenApiSecurityScheme
