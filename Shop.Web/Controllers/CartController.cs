@@ -19,6 +19,11 @@ namespace Shop.Web.Controllers
         {
             return View(await LoadCartForLoggedInUser());
         }
+        [Authorize]
+        public async Task<IActionResult> Checkout()
+        {
+            return View(await LoadCartForLoggedInUser());
+        }
 
         private async Task<CartDto> LoadCartForLoggedInUser()
         {
