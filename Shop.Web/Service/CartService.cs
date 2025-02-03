@@ -54,6 +54,15 @@ namespace Shop.Web.Service
             });
         }
 
-      
+        public async Task<ResponseDto?> EmailCart(CartDto cartDto)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Details.ApiType.POST,
+                Data = cartDto,
+                Url = Details.ShoppingCartApi + $"/api/CartApi/EmailCartRequst"
+
+            });
+        }
     }
 }

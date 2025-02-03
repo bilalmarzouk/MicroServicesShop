@@ -1,30 +1,26 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Shop.MessageBus;
-using Shop.Services.AuthApi.Data;
-using Shop.Services.AuthApi.Model;
-using Shop.Services.AuthApi.Model.Dto;
-using Shop.Services.AuthApi.Service;
-using Shop.Services.AuthApi.Service.Interfaces;
+using Microsoft.OpenApi.Models;
+using Shop.Services.EmailAPI.Data;
+using Shop.Services.EmailAPI.Extentions;
+using Shop.Services.EmailAPI.Messaging;
+using Shop.Services.EmailAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IAuthService, AuthService>();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddSwaggerGen();
-
-
+builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections"))
 );
-builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
-builder.Services.AddIdentity<ApplicationUsers, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-builder.Services.AddScoped<IJWTTokenGenrator, JWTTokenGenrator>();
-builder.Services.AddScoped<IMessageBus,MessageBus>();
+var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections"));
+builder.Services.AddSingleton(new EmailService(optionBuilder.Options));
+builder.Services.AddSwaggerGen();
+   
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,13 +31,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
 ApplyMigration();
+app.UseAzureServiceBusConsumer();
 app.Run();
-
 void ApplyMigration()
 {
     using (var scope = app.Services.CreateScope())

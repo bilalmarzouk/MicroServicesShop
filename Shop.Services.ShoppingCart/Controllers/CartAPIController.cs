@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shop.MessageBus;
 using Shop.Services.ShoppingCart.Data;
 using Shop.Services.ShoppingCart.Model;
 using Shop.Services.ShoppingCart.Model.Dto;
@@ -18,13 +19,19 @@ namespace Shop.Services.ShoppingCart.Controllers
         private readonly ApplicationDbContext _db;
         private IProductService _productService;
         private ICouponService _couponService;
-        public CartAPIController(ApplicationDbContext db, IMapper mapper, IProductService productService, ICouponService couponService)
+        private IConfiguration _configuration;
+        private readonly IMessageBus _messageBus;
+        public CartAPIController(ApplicationDbContext db, IMapper mapper,
+            IProductService productService, ICouponService couponService,
+            IMessageBus messageBus, IConfiguration configuration)
         {
             _db = db;
             _mapper = mapper;
             this._response = new();
             _productService = productService;
             _couponService = couponService;
+            _messageBus = messageBus;
+            _configuration = configuration;
         }
 
         [HttpPost("CartUpsert")]
@@ -163,6 +170,21 @@ namespace Shop.Services.ShoppingCart.Controllers
                     _db.CartHeaders.Remove(HeaderToRemove);
                 }
                 await _db.SaveChangesAsync();
+                _response.Result = true;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+        [HttpPost("EmailCartRequst")]
+        public async Task<object> EmailCartRequst([FromBody] CartDto cartDto)
+        {
+            try
+            {
+                await _messageBus.PublishMessage(cartDto, _configuration.GetValue<string>("ApiSettings:TopicAndQueueNames:EmailShoppingCartQueue"));
                 _response.Result = true;
             }
             catch (Exception ex)

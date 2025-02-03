@@ -11,7 +11,8 @@ namespace Shop.Web.Service.Interfaces
     
 
         Task<ResponseDto?> ApplyCouponAsync(CartDto Cart);
-       
+        Task<ResponseDto?> EmailCart(CartDto Cart);
+
 
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Shop.MessageBus;
 using Shop.Services.AuthApi.Data;
 using Shop.Services.AuthApi.Model;
 using Shop.Services.AuthApi.Model.Dto;
@@ -12,12 +14,16 @@ namespace Shop.Services.AuthApi.Service
         private readonly UserManager<ApplicationUsers> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private IJWTTokenGenrator _jwtTokenGenrator;
-        public AuthService(ApplicationDbContext db, UserManager<ApplicationUsers> userManager, RoleManager<IdentityRole> roleManager, IJWTTokenGenrator jwtTokenGenrator)
+
+        public AuthService(ApplicationDbContext db, UserManager<ApplicationUsers> userManager, 
+            RoleManager<IdentityRole> roleManager, IJWTTokenGenrator jwtTokenGenrator
+            )
         {
             _db = db;
             _userManager = userManager;
             _roleManager = roleManager;
             _jwtTokenGenrator = jwtTokenGenrator;
+           
         }
 
         public async Task<bool> AssignRole(string email, string rolename)
@@ -88,6 +94,7 @@ namespace Shop.Services.AuthApi.Service
                         PhoneNumer = userResult.PhoneNumber,
                         Name = userResult.Name,
                     };
+                   
                     return "";
                 }
                 else
