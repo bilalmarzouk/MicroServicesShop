@@ -34,6 +34,7 @@ namespace Shop.Web.Service
 
             if (requestdto.Data != null)
             {
+                var test = JsonConvert.SerializeObject(requestdto.Data);
                 message.Content = new StringContent(JsonConvert.SerializeObject(requestdto.Data), Encoding.UTF8, "application/json");
             }
             HttpResponseMessage? apiResponse = null;

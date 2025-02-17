@@ -8,6 +8,7 @@ using Shop.Services.OrderApi.Extentions;
 using Shop.Services.OrderApi.Service;
 using Shop.Services.OrderApi.Service.IService;
 using Shop.Services.OrderApi.Utility;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<APiAuthenticationHttpClientHandler>();
 builder.Services.AddScoped<IMessageBus, MessageBus>();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductService, Shop.Services.OrderApi.Service.ProductService>();
 
 
 builder.AddAppAuthentication();
@@ -64,7 +65,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("ApiSettings:Stripe:SecretKey").Get<string>();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

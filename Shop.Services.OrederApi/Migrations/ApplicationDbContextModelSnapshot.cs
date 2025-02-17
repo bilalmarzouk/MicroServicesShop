@@ -55,11 +55,11 @@ namespace Shop.Services.OrderApi.Migrations
 
             modelBuilder.Entity("Shop.Services.OrderApi.Models.OrderHeader", b =>
                 {
-                    b.Property<int>("ProductHeaderId")
+                    b.Property<int>("OrderHeaderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductHeaderId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderHeaderId"));
 
                     b.Property<string>("CouponCode")
                         .HasColumnType("nvarchar(max)");
@@ -82,7 +82,7 @@ namespace Shop.Services.OrderApi.Migrations
                     b.Property<double>("OrderTotal")
                         .HasColumnType("float");
 
-                    b.Property<string>("PaymentId")
+                    b.Property<string>("PaymentIntentId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -97,7 +97,7 @@ namespace Shop.Services.OrderApi.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ProductHeaderId");
+                    b.HasKey("OrderHeaderId");
 
                     b.ToTable("OrderHeaders");
                 });

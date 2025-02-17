@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Shop.Services.CouponAPI.Data;
 using Shop.Services.CouponAPI.Models;
 using Shop.Services.CouponAPI.Models.Dto;
+
 
 namespace Shop.Services.CouponAPI.Controllers
 {
@@ -86,6 +88,15 @@ namespace Shop.Services.CouponAPI.Controllers
                 _db.SaveChanges();
 
                
+                var options = new Stripe.CouponCreateOptions
+                {
+                    AmountOff = (long)(coupondto.DiscountAmount*100),
+                    Name = coupondto.CopounCode,
+                    Currency = "eur",
+                    Id=coupondto.CopounCode
+                };
+                var service = new Stripe.CouponService();
+                service.Create(options);
                 _response.Result = _mapper.Map<CouponDto>(coupon);
                 return _response;
             }
@@ -128,6 +139,9 @@ namespace Shop.Services.CouponAPI.Controllers
               
                 _db.Coupons.Remove(result);
                 _db.SaveChanges();
+
+                var service = new Stripe.CouponService();
+                service.Delete(result.CopounCode);
             }
             catch (Exception ex)
             {
