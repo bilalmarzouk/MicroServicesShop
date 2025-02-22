@@ -95,7 +95,7 @@ namespace Shop.Services.OrderApi.Controllers
                     {
                         PriceData = new SessionLineItemPriceDataOptions
                         {
-                            UnitAmount = (long)(item.ProductPrice * 100),
+                            UnitAmount = (long)(item.Price * 100),
                             Currency = "eur",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
@@ -128,7 +128,7 @@ namespace Shop.Services.OrderApi.Controllers
         }
         [Authorize]
         [HttpGet("GetOrders")]
-        public ResponseDto? Get(string? userId = "")
+        public ResponseDto? Get([FromBody] string? userId = "")
         {
             try
             {
@@ -152,7 +152,8 @@ namespace Shop.Services.OrderApi.Controllers
         }
 
         [Authorize]
-        [HttpGet("GetOrder{id:int}")]
+        [HttpGet("GetOrder/{id:int}")]
+        
         public ResponseDto? Get(int Id)
         {
             try
@@ -205,7 +206,7 @@ namespace Shop.Services.OrderApi.Controllers
             return _response;
         }
         [Authorize]
-        [HttpPost("UpdateORderStatus/{orderId:int}")]
+        [HttpPost("UpdateOrderStatus/{orderId:int}")]
         public async Task<ResponseDto> UpdateOrdersStatus(int orderId, [FromBody] string newStatus)
         {
             try

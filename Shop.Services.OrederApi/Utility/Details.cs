@@ -10,7 +10,7 @@
         public const string Status_Cancelled = "Cancelled";
 
 
-        public const string RoleAdmin = "Admin";
+        public const string RoleAdmin = "ADMIN";
         public const string RoleCustomer = "Customer";
 
     }

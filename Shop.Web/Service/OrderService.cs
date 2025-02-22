@@ -17,7 +17,7 @@ namespace Shop.Web.Service
             {
                 ApiType = Utility.Details.ApiType.POST,
                 Data = cartDto,
-                Url = Details.OrderApiBase + $"/api/OrderApi/CreateOrder"
+                Url = Details.OrderApiBase + $"/api/orderAPI/CreateOrder"
 
             });
         }
@@ -28,7 +28,39 @@ namespace Shop.Web.Service
             {
                 ApiType = Utility.Details.ApiType.POST,
                 Data = stripeRequestDto,
-                Url = Details.OrderApiBase + $"/api/OrderApi/CreateStripeSession"
+                Url = Details.OrderApiBase + $"/api/orderAPI/CreateStripeSession"
+
+            });
+        }
+
+        public async Task<ResponseDto?> GetAllOrder(string? userId)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Details.ApiType.GET,
+                Data=userId,
+                Url = Details.OrderApiBase + $"/api/orderAPI/GetOrders"
+
+            });
+        }
+
+        public async  Task<ResponseDto?> GetOrder(int orderId)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Details.ApiType.GET,
+                Url = Details.OrderApiBase + $"/api/orderAPI/GetOrder/{orderId}"
+
+            });
+        }
+
+        public async  Task<ResponseDto?> UpdateOrderStatus(int orderId, string newStatus)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Details.ApiType.POST,
+                Data = newStatus,
+                Url = Details.OrderApiBase + $"/api/orderAPI/UpdateOrderStatus/{orderId}"
 
             });
         }
@@ -39,7 +71,7 @@ namespace Shop.Web.Service
             {
                 ApiType = Utility.Details.ApiType.POST,
                 Data = orderDetailId,
-                Url = Details.OrderApiBase + $"/api/OrderApi/ValidateStripeSession/"
+                Url = Details.OrderApiBase + $"/api/orderAPI/ValidateStripeSession/"
 
             });
         }

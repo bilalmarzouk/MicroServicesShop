@@ -7,7 +7,7 @@
         public static string AuthAPIBase { get; set; }
         public static string ShoppingCartApi { get; set; }
         public static string OrderApiBase { get; set; }
-        public const string RoleAdmin = "Admin";
+        public const string RoleAdmin = "ADMIN";
         public const string RoleCustomer = "Customer";
         public const string TokenCookie = "JWTToken";
         public enum ApiType

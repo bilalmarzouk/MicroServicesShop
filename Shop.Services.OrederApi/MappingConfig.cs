@@ -17,7 +17,7 @@ namespace Shop.Services.OrderApi
                 ForMember(dest => dest.CartTotal, u => u.MapFrom(src => src.OrderTotal)).ReverseMap();
                 conifg.CreateMap<CartDetailDto, OrderDetailsDto>().
                   ForMember(dest => dest.ProductName, u => u.MapFrom(src => src.Product.Name))
-                  .ForMember(dest => dest.ProductPrice, u => u.MapFrom(src => src.Product.Price));
+                  .ForMember(dest => dest.Price, u => u.MapFrom(src => src.Product.Price));
                 conifg.CreateMap<OrderDetailsDto, CartDetailDto>();
                 conifg.CreateMap<OrderDetails, OrderDetailsDto>().ReverseMap();
                 conifg.CreateMap<OrderHeader, OrderHeaderDto>().ReverseMap();
