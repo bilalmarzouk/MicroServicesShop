@@ -61,11 +61,37 @@ namespace Shop.Services.ProductAPI.Controllers
         }
         [HttpPut]
         [Authorize(Roles = "ADMIN")]
-        public ResponseDto Put([FromBody] ProductDto body)
+        public ResponseDto Put(ProductDto body)
         {
             try
             {
                 var product = _mapper.Map<Product>(body);
+                if (body.Image != null)
+                {
+                    if (!string.IsNullOrEmpty(product.ImageLocalPath))
+                    {
+                        var oldFilePAthDirectory = Path.Combine(Directory.GetCurrentDirectory(), product.ImageLocalPath);
+                        FileInfo file = new FileInfo(oldFilePAthDirectory);
+                        if (file.Exists)
+                        {
+                            file.Delete();
+                        }
+                    }
+                    string fileName = product.ProductId + Path.GetExtension(body.Image.FileName);
+                    string filePath = @"wwwroot\ProductImages\" + fileName;
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+
+                    using (var filestream = new FileStream(filePathDirectory, FileMode.Create))
+                    {
+                        body.Image.CopyTo(filestream);
+                    }
+                    var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
+                    product.ImageUrl = baseUrl + "/ProductImages/" + fileName;
+                    product.ImageLocalPath = filePath;
+
+                }
+
+            
                 _db.Products.Update(product);
                 _db.SaveChanges();
 
@@ -81,7 +107,7 @@ namespace Shop.Services.ProductAPI.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "ADMIN")]
-        public ResponseDto Post([FromBody] ProductDto body)
+        public ResponseDto Post(ProductDto body)
         {
             try
             {
@@ -89,8 +115,31 @@ namespace Shop.Services.ProductAPI.Controllers
                 _db.Products.Add(product);
                 _db.SaveChanges();
 
+                if (body.Image != null)
+                {
+                 
+                    string fileName = product.ProductId + Path.GetExtension(body.Image.FileName);
+                    string filePath = @"wwwroot\ProductImages\" + fileName;
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+
+                    using (var filestream = new FileStream(filePathDirectory, FileMode.Create))
+                    {
+                        body.Image.CopyTo(filestream);
+                    }
+                    var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
+                    product.ImageUrl = baseUrl + "/ProductImages/" + fileName;
+                    product.ImageLocalPath = filePath;
+                  
+                }
+             
+                else
+                {
+                    product.ImageUrl = "https://placehold.co/600*400";
+                }
+                _db.Products.Update(product);
+                _db.SaveChanges();
                 _response.Result = _mapper.Map<Product>(product);
-                return _response;
+            
             }
             catch (Exception ex)
             {
@@ -108,6 +157,15 @@ namespace Shop.Services.ProductAPI.Controllers
             try
             {
                 Product product = _db.Products.First(c => c.ProductId == id);
+                if(!string.IsNullOrEmpty(product.ImageLocalPath))
+                {
+                    var oldFilePAthDirectory = Path.Combine(Directory.GetCurrentDirectory(), product.ImageLocalPath);
+                    FileInfo file = new FileInfo(oldFilePAthDirectory);
+                    if(file.Exists)
+                    {
+                        file.Delete();
+                    }
+                }
                 _db.Products.Remove(product);
                 _db.SaveChanges();
             }

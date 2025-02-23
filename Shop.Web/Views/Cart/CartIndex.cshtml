@@ -64,12 +64,12 @@
                         {
                             <span>Coupon:</span>
                             <input asp-for="CartHeader.CouponCode" disabled/>
-                            <button asp-action="ApplyCoupon" type="submit" class="btn btn-sm btn-success"> Remove </button>
+                                <button asp-action="RemoveCoupon" type="submit" class="btn btn-sm btn-success"> Remove </button>
                         }
                         else{
                             <span>Coupon:</span>
                             <input asp-for="CartHeader.CouponCode" />
-                            <button asp-action="ApplyCoupon" type="RemoveCoupon" class="btn btn-sm btn-success"> Apply </button>
+                                <button asp-action="ApplyCoupon" type="submit" class="btn btn-sm btn-success"> Apply </button>
                         }
                     </div>
                     <div class="col-6 text-end">

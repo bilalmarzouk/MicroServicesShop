@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Services.OrderApi", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Services.RewardApi", "Shop.Services.RewardApi\Shop.Services.RewardApi.csproj", "{6FAC30C5-6CFD-4BC3-8BED-98123E5D4596}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.GetwaySolution", "Shop.GewaySolution\Shop.GetwaySolution.csproj", "{EF2D9B34-925F-40B3-A676-09E47737ACD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{6FAC30C5-6CFD-4BC3-8BED-98123E5D4596}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FAC30C5-6CFD-4BC3-8BED-98123E5D4596}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FAC30C5-6CFD-4BC3-8BED-98123E5D4596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2D9B34-925F-40B3-A676-09E47737ACD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2D9B34-925F-40B3-A676-09E47737ACD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2D9B34-925F-40B3-A676-09E47737ACD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2D9B34-925F-40B3-A676-09E47737ACD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,5 +91,6 @@ Global
 		{7EF05C6A-BE32-43FA-85FD-D626A9086843} = {66D22BFE-4636-4B31-A609-E0A8952D8F6B}
 		{12A39C6A-0D80-471D-81B5-1E8139B964A0} = {66D22BFE-4636-4B31-A609-E0A8952D8F6B}
 		{6FAC30C5-6CFD-4BC3-8BED-98123E5D4596} = {66D22BFE-4636-4B31-A609-E0A8952D8F6B}
+		{EF2D9B34-925F-40B3-A676-09E47737ACD2} = {BD1E4A36-91A1-4DB8-A4D1-CFE6018555D5}
 	EndGlobalSection
 EndGlobal

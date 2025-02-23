@@ -17,7 +17,8 @@ namespace Shop.Web.Service
             {
                 ApiType = Utility.Details.ApiType.POST,
                 Data = Productdto,
-                Url = Details.ProductAPIBase + $"/api/ProductApi/"
+                Url = Details.ProductAPIBase + $"/api/ProductApi/",
+                ContentType = Details.ContentType.MultipartFromData
 
             });
         }
@@ -68,7 +69,8 @@ namespace Shop.Web.Service
             {
                 ApiType = Utility.Details.ApiType.PUT,
                 Data = Product,
-                Url = Details.ProductAPIBase + $"/api/ProductApi/"
+                Url = Details.ProductAPIBase + $"/api/ProductApi/",
+                ContentType = Details.ContentType.MultipartFromData
 
             });
         }
