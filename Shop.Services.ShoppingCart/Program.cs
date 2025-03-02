@@ -5,6 +5,7 @@ using Shop.MessageBus;
 using Shop.Services.ShoppingCart;
 using Shop.Services.ShoppingCart.Data;
 using Shop.Services.ShoppingCart.Extentions;
+using Shop.Services.ShoppingCart.RabbitMQSender;
 using Shop.Services.ShoppingCart.Service;
 using Shop.Services.ShoppingCart.Service.IService;
 using Shop.Services.ShoppingCart.Utility;
@@ -23,8 +24,8 @@ var mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<APiAuthenticationHttpClientHandler>();
-builder.Services.AddScoped<IMessageBus, MessageBus>();
+builder.Services.AddScoped<APiAuthenticationHttpClientHandler>(); 
+builder.Services.AddScoped<IRabiitMQCartMessageSender, RabiitMQCartMessageSender>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<ICouponService, CouponService>();

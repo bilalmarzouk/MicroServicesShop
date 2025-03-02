@@ -5,6 +5,7 @@ using Shop.MessageBus;
 using Shop.Services.OrderApi;
 using Shop.Services.OrderApi.Data;
 using Shop.Services.OrderApi.Extentions;
+using Shop.Services.OrderApi.RabbitMQSender;
 using Shop.Services.OrderApi.Service;
 using Shop.Services.OrderApi.Service.IService;
 using Shop.Services.OrderApi.Utility;
@@ -25,7 +26,7 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<APiAuthenticationHttpClientHandler>();
-builder.Services.AddScoped<IMessageBus, MessageBus>();
+builder.Services.AddScoped<IRabiitMQCartMessageSender, RabiitMQOrderMessageSender>();
 builder.Services.AddScoped<IProductService, Shop.Services.OrderApi.Service.ProductService>();
 
 

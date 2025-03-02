@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Shop.MessageBus;
 using Shop.Services.AuthApi.Model.Dto;
 using Shop.Services.AuthApi.Models.Dto;
+using Shop.Services.AuthApi.RabbitMQSender;
 using Shop.Services.AuthApi.Service.Interfaces;
 
 namespace Shop.Services.AuthApi.Controllers
@@ -14,9 +15,9 @@ namespace Shop.Services.AuthApi.Controllers
     {
         private readonly IAuthService _authService;
         public ResponseDto _response;
-        private readonly IMessageBus _messageBus;
+        private readonly IRabiitMQAuthMessageSender _messageBus;
         private IConfiguration _configuration;
-        public AuthAPIController(IAuthService authService, IMessageBus messageBus, IConfiguration configuration)
+        public AuthAPIController(IAuthService authService, IRabiitMQAuthMessageSender messageBus, IConfiguration configuration)
         {
            _authService = authService;
             _messageBus = messageBus;
@@ -34,7 +35,7 @@ namespace Shop.Services.AuthApi.Controllers
                 _response.Message = responseMassage;
                 return BadRequest(_response);
             }
-            await _messageBus.PublishMessage(model.Email, _configuration.GetValue<string>("ApiSettings:TopicAndQueueNames:EmailRegistrationCartQueue"));
+            await _messageBus.SendMessage(model.Email, _configuration.GetValue<string>("ApiSettings:TopicAndQueueNames:EmailRegistrationCartQueue"));
             return Ok(_response);
         }
         [HttpPost("login")]

@@ -5,6 +5,7 @@ using Shop.MessageBus;
 using Shop.Services.AuthApi.Data;
 using Shop.Services.AuthApi.Model;
 using Shop.Services.AuthApi.Model.Dto;
+using Shop.Services.AuthApi.RabbitMQSender;
 using Shop.Services.AuthApi.Service;
 using Shop.Services.AuthApi.Service.Interfaces;
 
@@ -24,7 +25,8 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
 builder.Services.AddIdentity<ApplicationUsers, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddScoped<IJWTTokenGenrator, JWTTokenGenrator>();
-builder.Services.AddScoped<IMessageBus,MessageBus>();
+//builder.Services.AddScoped<IMessageBus,MessageBus>();
+builder.Services.AddScoped<IRabiitMQAuthMessageSender, RabiitMQAuthMessageSender>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

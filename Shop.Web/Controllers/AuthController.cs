@@ -73,7 +73,7 @@ namespace Shop.Web.Controllers
                 assignRole = await _authService.AssignRoleAsync(model);
                 if (assignRole != null && assignRole.IsSuccess)
                 {
-                    TempData["success"] = "Registration Successful";
+                    TempData["Successful"] = "Registration Successful";
                     return RedirectToAction(nameof(Login));
                 }
             }

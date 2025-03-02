@@ -7,6 +7,7 @@ using Shop.MessageBus;
 using Shop.Services.OrderApi.Data;
 using Shop.Services.OrderApi.Models;
 using Shop.Services.OrderApi.Models.Dto;
+using Shop.Services.OrderApi.RabbitMQSender;
 using Shop.Services.OrderApi.Service.IService;
 using Shop.Services.OrderApi.Utility;
 using Stripe;
@@ -22,9 +23,9 @@ namespace Shop.Services.OrderApi.Controllers
         private readonly IMapper _mapper;
         private readonly ApplicationDbContext _db;
         private readonly IProductService _productService;
-        private readonly IMessageBus _messageBus;
+        private readonly IRabiitMQCartMessageSender _messageBus;
         private readonly IConfiguration _configuration;
-        public OrderAPIController(ApplicationDbContext db, IProductService productService, IMapper mapper, IConfiguration configuration, IMessageBus messageBus)
+        public OrderAPIController(ApplicationDbContext db, IProductService productService, IMapper mapper, IConfiguration configuration, IRabiitMQCartMessageSender messageBus)
         {
             _db = db;
             _mapper = mapper;
@@ -194,7 +195,7 @@ namespace Shop.Services.OrderApi.Controllers
                     UserId = orderHeader.UserId
                 };
                 string topicsName = _configuration.GetValue<string>("ApiSettings:TopicAndQueueNames:OrderCreatedTopic");
-                await _messageBus.PublishMessage(rewardsDto, topicsName);
+                await _messageBus.SendMessage(rewardsDto, topicsName);
                 _response.Result = _mapper.Map<OrderHeaderDto>(orderHeader);
 
             }
